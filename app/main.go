@@ -4,11 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/AlpineCoder/terrible-api/router"
+	"github.com/AlpineCoder/terrible-api/foundation/web"
 )
 
 func main() {
-	r := router.NewRouter()
+	w := web.NewRouter()
 	log.Println("Server starting on :8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8080", w))
 }

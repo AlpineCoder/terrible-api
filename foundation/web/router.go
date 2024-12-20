@@ -1,12 +1,12 @@
-package router
+package web
 
 import (
 	"net/http"
 
 	debug "github.com/AlpineCoder/terrible-api/api/debug/handlers"
 	"github.com/AlpineCoder/terrible-api/api/v1/handlers"
-	"github.com/AlpineCoder/terrible-api/backend"
 	"github.com/AlpineCoder/terrible-api/middleware"
+	"github.com/AlpineCoder/terrible-api/store"
 )
 
 // Router for live- and readiness probes
@@ -14,10 +14,10 @@ import (
 // Authenticated Router
 func NewRouter() http.Handler {
 
-	store := backend.NewBackend()
+	store := store.NewBackend()
 
 	// Create handler with the datastore injected
-	handlerWithStore := &handlers.HandlerWithStore{Store: store}
+	handlerWithStore := handlers.HandlerWithStore{Store: store}
 
 	mainMux := http.NewServeMux()
 
@@ -28,6 +28,8 @@ func NewRouter() http.Handler {
 	// Authenticated API routes
 	authMux := http.NewServeMux()
 	authMux.HandleFunc("/api/hello", handlerWithStore.HelloHandler)
+	authMux.HandleFunc("/api/monsters", handlerWithStore.MonstersHandler)
+	// authMux.HandleFunc("/api/monsters/", handlerWithStore.HelloHandler)
 
 	authenticatedRoutes := middleware.BasicAuth(authMux)
 

@@ -1,7 +1,7 @@
 package handlers
 
-import "github.com/AlpineCoder/terrible-api/backend"
+import "github.com/AlpineCoder/terrible-api/store"
 
 type HandlerWithStore struct {
-	Store *backend.Backend
+	Store *store.Store
 }

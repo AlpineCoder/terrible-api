@@ -1,4 +1,4 @@
-package router
+package web
 
 const (
 	// HealthzLivenessPath is the path for the liveness probe
